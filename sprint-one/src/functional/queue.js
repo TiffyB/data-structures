@@ -8,11 +8,14 @@ var Queue = function() {
 
   someInstance.enqueue = function(value) {
     queue++;
+    storage[queue] = value;
   };
 
   someInstance.dequeue = function() {
   if(queue > 0){
+    var temp = storage[queue];
     queue--;
+    return temp;
   }
   };
 
