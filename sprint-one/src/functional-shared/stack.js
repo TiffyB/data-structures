@@ -20,10 +20,14 @@ var stackMethods = {};
 //need function for push
 stackMethods.push = function(value) {
   //side effect: adds to storage
+  this.storage[value] = value;
 };
 
 //need function for pop
 stackMethods.pop = function() {
+  var temp = Object.keys(this.storage)[Object.keys(this.storage).length - 1];
+  delete this.storage[Object.keys(this.storage)[Object.keys(this.storage).length - 1]];
+  return temp;
   //side effect: removes from storage
   //output = whatever was removed
 };
