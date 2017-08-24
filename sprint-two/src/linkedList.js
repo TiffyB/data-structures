@@ -1,36 +1,59 @@
 var LinkedList = function() {
   var list = {};
-  list.head = {
-    value: null
-
-  };
-  list.tail = {
-    listedValues: []
-  };
+  list.head = null;
+  list.tail = null;
+  
 
   list.addToTail = function(value) {
-    list.tail.listedValues.push(value);
-    list.tail.value = list.tail.listedValues[list.tail.listedValues.length - 1];
-    list.head.value = list.tail.listedValues[0];
-  };
 
-  list.removeHead = function() {
-    /*
-    var temp = Node(list.head[Object.keys(list.head)[0]];
-    delete list.head[Object.keys(list.head)[0]];
-    return temp;
-    */
-    var temp = list.tail.listedValues.shift();
-    list.head.value = list.tail.listedValues[0];
-    return temp;
+    var newTail = Node(value);
+
+    if (!list.head) {
+      list.head = newTail;
+      list.tail = newTail;
+    } else if (list.head.value === list.tail.value) {
+      list.head.next = newTail;
+      list.tail = newTail;
+    } else {
+      list.tail.next = newTail;
+      list.tail = list.tail.next;
+    }
+    
+    
     
   };
 
-  list.contains = function(target) {
+  list.removeHead = function() {
+    var temp = list.head;
+    list.head = list.head.next;
+    return temp.value;
+    
+  };
+
+  list.contains = function(target, element) {
+  // check head value for target
+    if (element === undefined) {
+      element = list.head;
+    }
+    
+    if (element.value === target) {
+      return true;
+    } else if (!element.next) {
+      return false;
+    } else {
+      element = element.next;
+      return list.contains(target, element);
+    }
+      
+    return false;
+  // if equals target return true
+  // else check the NEXT step
+  // will know if false when reaches tail
   //search for target
   };
 
   return list;
+  
 };
 
 var Node = function(value) {
