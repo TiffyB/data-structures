@@ -15,32 +15,35 @@ var Tree = function(value) {
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
-  this.children[this.children.length] = Tree(value);
+  this.children.push(Tree(value));
 };
 
-treeMethods.contains = function(target, branch) {
-  if (branch === undefined) {
-    //branch = this.value;
-    branch = this;
-  }
-  console.log(this);
-  if (this.value === target) {
-    return true;    
-    console.log('im true');
-  } else if (this.children.length > 0) {
-    console.log('i got here');
-    for (var i = 0; i < this.children.length; i++) { 
-      console.log('blah');
-      //branch = this.children[i];
-      treeMethods.contains(target, this.children[i]);
+treeMethods.contains = function(target) {
+  console.log(this.children[0].value);
+  var result = [];
+  var recurseivlySearchTree = function(tree, result) {
+    //console.log(tree.value);
+    if (tree.value === target) {
+      
+      result.push(true);
+    } else if (tree.children.length !== 0) {
+      for (var i = 0; i < tree.children.length; i++) {
+        recurseivlySearchTree(tree.children[i], result);
+      }
     }
-    
+    return false;
+   
+  };
+  
+  recurseivlySearchTree(this, result);
+  return result.length !== 0;
+
+  //return false; 
     
     //traverse children in the tree
     //check if children contains target
     //
-  }
-  return false; 
+  
   
 };
 
