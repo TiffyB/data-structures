@@ -48,25 +48,19 @@ binaryMethods.contains = function(target, branch) {
       return this.contains(target, branch.right);
     }
   }
-  /*
-  console.log(result.length);
-  return result.length > 0;
-  */
-  //return false;
-  
-//if value equals target 
-    //return true
-  //else compare current value to target
-    // if target is smaller go left
-       // call contains of left branch
-    // if target is bigger go right
-        // call contains on left branch
-    //
-
 };
 
-binaryMethods.depthFirstLog = function() {
-
+binaryMethods.depthFirstLog = function(func, branch) {
+  if (branch === undefined) {
+    branch = this;
+  }  
+  func(branch.value);
+  if (branch.left) {
+    return this.depthFirstLog(func, branch.left);
+  }
+  if (branch.right) {
+    return this.depthFirstLog(func, branch.right);
+  }
 };
 
 
