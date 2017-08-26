@@ -8,62 +8,55 @@ var BinarySearchTree = function(value) {
 };
 
 var binaryMethods = {};
-binaryMethods.insert = function(value, branch) {
-  if (branch === undefined) {
-    branch = this;
-  }
-  
-  if (value > branch.value) {
-    if (!branch.right) {
-      branch.right = BinarySearchTree(value);
+
+binaryMethods.insert = function(value) {
+  if (value > this.value) {
+    if (!this.right) {
+      this.right = BinarySearchTree(value);
     } else { 
-      return this.insert(value, branch.right);
+      return this.right.insert(value);
     }
-  } else if (value < branch.value) {
-    if (!branch.left) {
-      branch.left = BinarySearchTree(value);
+  } else if (value < this.value) {
+    if (!this.left) {
+      this.left = BinarySearchTree(value);
     } else {
-      return this.insert(value, branch.left);
+      return this.left.insert(value);
     }
   }
-
 };
 
-binaryMethods.contains = function(target, branch) {
-  if (branch === undefined) {
-    branch = this;
-  }  
-  if (branch.value === target) {
+binaryMethods.contains = function(target) {
+  if (this.value === target) {
     return true;
-  } else if (target < branch.value) {
-    if (!branch.left) {
-      return this.contains(target, branch.left);
+  } else if (target < this.value) {
+    if (!this.left) {
+      return this.left.contains(target);
     } else {
       return false;
     }
-  } else if (target > branch.value) {
-    if (!branch.right) {
+  } else if (target > this.value) {
+    if (!this.right) {
       return false;
     } else {
-      return this.contains(target, branch.right);
+      return this.right.contains(target);
     }
   }
 };
 
-binaryMethods.depthFirstLog = function(func, branch) {
-  if (branch === undefined) {
-    branch = this;
-  }  
-  func(branch.value);
-  if (branch.left) {
-    return this.depthFirstLog(func, branch.left);
+
+binaryMethods.depthFirstLog = function(func) { 
+  func(this.value);
+  if (this.left) {
+    return this.left.depthFirstLog(func);
   }
-  if (branch.right) {
-    return this.depthFirstLog(func, branch.right);
+  if (this.right) {
+    return this.right.depthFirstLog(func);
   }
 };
-
 
 /*
  * Complexity: What is the time complexity of the above functions?
+insert: O(log n) (assuming balanced)
+contains: O(log n) (assuming balanced)
+depthFirstLog: O(log n) (assuming balanced)
  */
