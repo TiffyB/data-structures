@@ -19,7 +19,6 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
-  console.log(this.children[0].value);
   var result = [];
   var recurseivlySearchTree = function(tree, result) {
     //console.log(tree.value);
