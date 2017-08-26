@@ -52,4 +52,12 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  it('should find the last element in a list', function() {
+    linkedList.addToTail(1);
+    linkedList.addToTail(2);
+    linkedList.addToTail(3);
+    linkedList.addToTail(4);
+    expect(linkedList.contains(4)).to.equal(true);
+    expect(linkedList.contains(5)).to.equal(false);
+  });
 });
