@@ -26,9 +26,42 @@ binaryMethods.insert = function(value, branch) {
       return this.insert(value, branch.left);
     }
   }
+
 };
 
-binaryMethods.contains = function(target) {
+binaryMethods.contains = function(target, branch) {
+  if (branch === undefined) {
+    branch = this;
+  }  
+  if (branch.value === target) {
+    return true;
+  } else if (target < branch.value) {
+    if (!branch.left) {
+      return this.contains(target, branch.left);
+    } else {
+      return false;
+    }
+  } else if (target > branch.value) {
+    if (!branch.right) {
+      return false;
+    } else {
+      return this.contains(target, branch.right);
+    }
+  }
+  /*
+  console.log(result.length);
+  return result.length > 0;
+  */
+  //return false;
+  
+//if value equals target 
+    //return true
+  //else compare current value to target
+    // if target is smaller go left
+       // call contains of left branch
+    // if target is bigger go right
+        // call contains on left branch
+    //
 
 };
 
